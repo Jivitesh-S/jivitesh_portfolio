@@ -78,18 +78,19 @@
         }
 
         const target = Number(entry.target.getAttribute("data-count"));
+        const suffix = entry.target.getAttribute("data-suffix") || "";
         const duration = 1100;
         const startTime = performance.now();
 
         function tick(now) {
           const progress = Math.min((now - startTime) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
-          entry.target.textContent = String(Math.round(target * eased));
+          entry.target.textContent = `${Math.round(target * eased)}${suffix}`;
 
           if (progress < 1) {
             requestAnimationFrame(tick);
           } else {
-            entry.target.textContent = String(target);
+            entry.target.textContent = `${target}${suffix}`;
           }
         }
 
